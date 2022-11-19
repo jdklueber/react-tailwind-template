@@ -20,7 +20,7 @@ npx create-react-app <application name>
 * From `public/`:  Remove all but index.html
 * Inside of `index.html`: Remove all references to `favicon.ico`, `logo.png`, `manifest.json`.  Also consider changing the `title` tag and the `meta` `description` tag.
 * From `src`: Remove all but `App.js`, `index.css`, and `index.js`. 
-* App.js`:  Replace with the following snippet
+* `App.js`:  Replace with the following snippet
 
 ```javascript
 function App() {
