@@ -1,70 +1,112 @@
-# Getting Started with Create React App
+# React plus Tailwind Template
+This repository contains an empty "hello world" React application for use as a template repo for spinning up new react applications with Tailwindcss already set up.  To use it:
+1.  Create a new repository with this as a template
+1.  Inside of your terminal, run `npm install`
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The application should be runnable at this point, and contains only the bare bones necessary to display Hello World styled with Tailwindcss.
 
-## Available Scripts
+Here are the steps used to create this template repo:
 
-In the project directory, you can run:
+### Build a new React application
 
-### `npm start`
+From your usual project directory:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+```console
+npx create-react-app <application name>
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Remove unnecessary files
 
-### `npm test`
+* From `public/`:  Remove all but index.html
+* Inside of `index.html`: Remove all references to `favicon.ico`, `logo.png`, `manifest.json`.  Also consider changing the `title` tag and the `meta` `description` tag.
+* From `src`: Remove all but `App.js`, `index.css`, and `index.js`. 
+* App.js`:  Replace with the following snippet
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```javascript
+function App() {
+  return (
+    <div>
+      Hello World
+    </div>
+  );
+}
 
-### `npm run build`
+export default App;
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+* `index.css`:  Delete all content
+* `index.js`:  Delete references to `reportWebVitals`
+* `package.json`:  Change the name of the project if needed, remove reference to `web-vitals` in the dependencies section.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Run the project to verify you get a Hello World message.
 
-### `npm run eject`
+## Install Tailwindcss
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+See https://tailwindcss.com/docs/installation/framework-guides for other frameworks.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+#### Install tailwind
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+From the console:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```console
+npm install -D tailwindcss postcss autoprefixer
+npx tailwindcss init -p
+```
 
-## Learn More
+#### Configure tailwind
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Update `tailwind.config.js`
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```javascript
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: [
+    "./src/**/*.{js,jsx,ts,tsx}",
+  ],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+}
+```
 
-### Code Splitting
+#### Update `index.css`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Add this to `index.css`:
 
-### Analyzing the Bundle Size
+```css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+#### Restart the server and verify that tailwind styling is in place
 
-### Making a Progressive Web App
+Update `App.js` to look like this:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+```javascript
+function App() {
+  return (
+    <div className="text-4xl">
+      Hello World
+    </div>
+  );
+}
 
-### Advanced Configuration
+export default App;
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+```
 
-### Deployment
+Your hello world should now be quite large and sans-serif.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## Making a new favicon.ico file: 
 
-### `npm run build` fails to minify
+See https://favicon.io/favicon-generator/
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+If you do this, you'll probably want to add the favicon link inside of `index.html`.
+
+```html
+  <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+```
+
